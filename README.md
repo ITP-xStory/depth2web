@@ -1,10 +1,10 @@
-# Body Tracking: Project Proposal
+# body2web: Project Proposal
 
-Body Tracking (final name for the tool TBD) is an Electron application that allows users to connect various body tracking devices to the web. This project is builds on Lisa Jamhoury's [Kinectron](http://kinectron.github.io).
+body2web (final name for the tool TBD) is an Electron application that allows users to connect various body tracking devices to the web. This project is builds on Lisa Jamhoury's [Kinectron](http://kinectron.github.io).
 
-Body Tracking aims to be "device agnostic", meaning that there will be less emphasis given to the individual body tracking tools themselves, and focuses on being the aggregating hub of various body tracking tools to provide uniform data for web-based use. Multiple devices can be connected to a single instance of an application to be sent over to the web to render real time graphics.
+body2web aims to be "device agnostic", meaning that there will be less emphasis given to the individual body tracking tools themselves, and focuses on being the aggregating hub of various body tracking tools to provide uniform data for web-based use. Multiple devices can be connected to a single instance of an application to be sent over to the web to render real time graphics.
 
-Body Tracking will initially focus on two aspects: 1) finding a common lingo for organizing data across all body tracking devices to be implemented on the platform and 2) figuring out the best way to package the data collected and parsed to the web.
+This tool will initially focus on two aspects: 1) finding a common lingo for organizing data across all body tracking devices to be implemented on the platform and 2) figuring out the best way to package the data collected and parsed to the web.
 
 The project idea came to fruition during development of [The Flow Room](https://github.com/js6450/theFlowRoom), a project by Julia Irwin, Lisa Jamhoury, Jung Hyun Moon and Jiwon Shin and funded by NYU Arts Council Visual Arts Initiative.
 
@@ -24,13 +24,13 @@ As an open source project, contributions to attach other devices beyond current 
 
 ## Deliverables
 
-On December 11, 2018, the first iteration of the Body Tracking application will be demoed. The goal for the demo is to have a Kinect, a realSense and a webcam connected to the application and send the computed data to a website rendering simple visualization of body data.
+On December 11, 2018, the first iteration of the body2web application will be demoed. The goal for the demo is to have a Kinect, a realSense and a webcam connected to the application and send the computed data to a website rendering simple visualization of body data.
 
 ## Implementation
 
 _Describe the technical details about your implementation and development process._
 
-Body Tracking is an Electron application that connects multiple devices that can track the body on one platform. This project builds upon Kinectron and for the first iteration, Intel RealSense 2.0 and PoseNet will be added to the application. For now, Kinectron sends data via peer.js, but there are plans to explore the use of socket.io or websocket node module as alternative options for users to send the data over to the web.
+body2web is an Electron application that connects multiple devices that can track the body on one platform. This project builds upon Kinectron and for the first iteration, Intel RealSense 2.0 and PoseNet will be added to the application. For now, Kinectron sends data via peer.js, but there are plans to explore the use of socket.io or websocket node module as alternative options for users to send the data over to the web.
 
 This tool is to collect, compute and send data about the body. The devices in consideration for this platform are not limited to gathering information about the body. Rather, they have depth cameras that are capable of providing data to compute a body blob. The SDK of the devices themselves do not have a built in function that users can readily utilize a 3D body blob. This means that part of the development of the tool will also be on computing a body blob through the images / data provided by the individual cameras. During the development of The Flow Room, a functionality for calculating the 3D body blob has already been created and ready to be implemented on Kinectron. 2D body blob can be calculated using PoseNet on 2D images.
 
@@ -64,7 +64,7 @@ The first iteration of this project will be completed over 5 weeks (Nov 6 - Dec 
 * Start fine tuning functionalities for electron application (UI / UX)
 
 ### Week 5
-* User testing and fine tuning for the first iteration of the Body Tracking application
+* User testing and fine tuning for the first iteration of the body2web application
 
 ## Documentation
 
