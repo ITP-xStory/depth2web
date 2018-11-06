@@ -4,6 +4,8 @@ body2web (final name for the tool TBD) is an Electron application that allows us
 
 body2web aims to be "device agnostic", meaning that there will be less emphasis given to the individual body tracking tools themselves, and focuses on being the aggregating hub of various body tracking tools to provide uniform data for web-based use. Multiple devices can be connected to a single instance of an application to be sent over to the web to render real time graphics.
 
+This tool is to collect, compute and send data about the body. The devices that are conventionally used for gathering information about the body. Rather, they have depth cameras that are capable of providing data to compute a body blob. Part of the development of the tool will also be on computing a body blob through the images / data provided by the individual cameras.
+
 This tool will initially focus on two aspects: 1) finding a common lingo for organizing data across all body tracking devices to be implemented on the platform and 2) figuring out the best way to package the data collected and parsed to the web.
 
 The project idea came to fruition during development of [The Flow Room](https://github.com/js6450/theFlowRoom), a project by Julia Irwin, Lisa Jamhoury, Jung Hyun Moon and Jiwon Shin and funded by NYU Arts Council Visual Arts Initiative.
