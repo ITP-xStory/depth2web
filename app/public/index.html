@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Depth 2 Web</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div id="control">
+        <div id="server">
+            <h2 id="server-msg">Broadcast to:</h2>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="addr">
+                    <label class="mdl-textfield__label" for="addr">Address</label>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised" id="startServer">
+                    Start
+                </button>
+            </form>
+        </div>
+        <div id="devices">
+            <h2>Add Devices:</h2>
+            <button class="mdl-button mdl-js-button mdl-button--raised" id="kinect">
+                Kinect
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised" id="realSense">
+                realSense
+            </button>
+        </div>
+        <hr>
+
+        <div id="devices-config"></div>
+
+        <img src="" id="framePreview">
+
+    </div>
+    <div id="view">
+
+    </div>
+</body>
+</html>

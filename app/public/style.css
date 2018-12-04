@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    height: 100%;
+}
+
+#control{
+    width: 50%;
+    height: 100%;
+    background: pink;
+    float: right;
+}
