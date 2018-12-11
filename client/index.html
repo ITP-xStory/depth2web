@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<img id="framePreview" src="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script>
+    let socket = io('http://localhost:8080');
+
+    socket.on('image', ({device, img}) => {
+        let blob = new Blob([img], {type: 'image/webp'});
+
+        let url = URL.createObjectURL(blob);
+        document.getElementById('framePreview').src = url;
+
+    })
+</script>
+</body>
+</html>

@@ -1,17 +1,14 @@
 const electron = require('electron');
 const {app, BrowserWindow, ipcMain} = electron;
 
-const socketServer = require("./socketServer/socketServer");
+const socketServer = require("./socketServer/SocketServer");
 
 let mainWindow = null;
-
 let currentServer = null;
 
 function createWindow(){
 
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-
-    //app.server = require(__dirname + '/app/server')();
 
     mainWindow = new BrowserWindow({width, height});
     mainWindow.loadURL("file://" + __dirname + "/app/public/index.html");
@@ -22,13 +19,21 @@ function createWindow(){
     ipcMain.on('start', (evt, type, port) =>{
         console.log('type', type, 'port', port);
         if (currentServer) {
+            console.log('server has already started. Add device ' + type);
+            currentServer.startDevice(type);
             evt.sender.send('started', currentServer.port);
             return;
         }
-        currentServer = socketServer(type, port, () => {
+        currentServer = new socketServer.SocketServer(port, () => {
             console.log('socket server started');
+            currentServer.startDevice(type);
             evt.sender.send('started', port);
         });
+    });
+
+    ipcMain.on('close', (evt) => {
+        currentServer.stop();
+        evt.sender.send('closed');
     });
 
     mainWindow.on('closed', function(){
@@ -74,7 +79,7 @@ app.on('quit', () => {
 process.on('exit', () => {
     console.log('kill process exit');
 
-    console.log('server', !!currentServer)
+    console.log('server', !!currentServer);
 
     if (currentServer) {
         currentServer.stop();

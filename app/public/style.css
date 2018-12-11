@@ -9,3 +9,13 @@ body{
     background: pink;
     float: right;
 }
+
+#view{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#framePreview{
+    width: 100%;
+}

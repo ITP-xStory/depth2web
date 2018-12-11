@@ -4,9 +4,18 @@ const Device = require('../Device');
 
 class RealSense extends Device {
     init(){
-        console.log("initializing realSense device...");
-        this.colorizer = new rs2.Colorizer();
+
+        //catch if device not connected
+
+        //this.cameraInfo = new rs2.camera_info;
+
         this.pipeline = new rs2.Pipeline();
+
+
+        this.colorizer = new rs2.Colorizer();
+
+        console.log("realSense device initialized");
+
 
         // this.config = new rs2.Config();
         // this.config.enableStream(0, -1, 0, 0, rs2.format.format_raw8, 0);
@@ -15,6 +24,8 @@ class RealSense extends Device {
     }
 
     start() {
+
+
         this.pipeline.start();
 
         this.poller = setInterval(() => {
@@ -25,9 +36,14 @@ class RealSense extends Device {
     getLastFrame() {
         const resultSet = this.pipeline.pollForFrames();
         if (resultSet && resultSet.depthFrame) {
+            //return resultSet;
            let depthFrame = this.colorizer.colorize(resultSet.depthFrame);
            this.onFrame({data: depthFrame.data, width: depthFrame.width, height: depthFrame.height});
         }
+    }
+
+    getDepth(){
+
     }
 
     //
