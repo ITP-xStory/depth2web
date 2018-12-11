@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/_depth2web.iml" filepath="$PROJECT_DIR$/.idea/_depth2web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/body2web.iml" filepath="$PROJECT_DIR$/.idea/body2web.iml" />
     </modules>
   </component>
 </project>

@@ -5,23 +5,39 @@
   "main": "/app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
   },
   "author": "Jiwon Shin",
   "license": "MIT",
   "dependencies": {
+    "asar": "^0.14.6",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "electron": "^3.0.10",
     "express": "^4.16.4",
     "http": "0.0.0",
     "node-librealsense": "^0.2130.0",
-    "kinect2": "^0.1.6",
     "sharp": "^0.21.0",
     "socket.io": "^2.2.0"
   },
+  "build": {
+    "appId": "Depth2Web",
+    "files": [
+      "./build/**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "extends": null
+  },
   "devDependencies": {
+    "electron": "^3.0.11",
     "electron-builder": "^20.38.3",
+    "electron-packager": "^13.0.0",
     "electron-rebuild": "^1.8.2"
   }
 }
