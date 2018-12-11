@@ -10,9 +10,10 @@ class RealSense extends Device {
         //this.cameraInfo = new rs2.camera_info;
 
         this.pipeline = new rs2.Pipeline();
-
-
         this.colorizer = new rs2.Colorizer();
+
+        this.depthFeed = false;
+        this.colorFeed = false;
 
         console.log("realSense device initialized");
 
@@ -20,12 +21,9 @@ class RealSense extends Device {
         // this.config = new rs2.Config();
         // this.config.enableStream(0, -1, 0, 0, rs2.format.format_raw8, 0);
         // this.config.resolve(this.pipeline);
-
     }
 
     start() {
-
-
         this.pipeline.start();
 
         this.poller = setInterval(() => {
@@ -35,41 +33,31 @@ class RealSense extends Device {
 
     getLastFrame() {
         const resultSet = this.pipeline.pollForFrames();
-        if (resultSet && resultSet.depthFrame) {
-            //return resultSet;
-           let depthFrame = this.colorizer.colorize(resultSet.depthFrame);
-           this.onFrame({data: depthFrame.data, width: depthFrame.width, height: depthFrame.height});
+        if (resultSet) {
+
+           if(this.depthFeed && resultSet.depthFrame){
+                let depthFrame = this.colorizer.colorize(resultSet.depthFrame);
+                this.onColorFrame({data: depthFrame.data, width: depthFrame.width, height: depthFrame.height});
+           }
+
+           if(this.colorFeed && resultSet.colorFrame){
+               let colorFrame = resultSet.colorFrame;
+               this.onColorFrame({data: colorFrame.data, width: colorFrame.width, height: colorFrame.height});
+           }
         }
     }
 
     getDepth(){
-
+        this.colorFeed = false;
+        this.depthFeed = true;
+        console.log('start depth cam');
     }
 
-    //
-    // drawDepth(){
-    //     while(this.on){
-    //         this.frameSet = this.pipeline.waitForFrames();
-    //         this.depthFrame = this.colorizer.colorize(this.frameSet.depthFrame);
-    //
-    //         if(this.depthFrame){
-    //             console.log("depth frame: " + this.depthFrame.data);
-    //         }
-    //        // this.drawDepth();
-    //         return this.depthFrame.data;
-    //     }
-    // }
-    //
-    // drawColor(){
-    //         this.frameSet = this.pipeline.waitForFrames();
-    //         this.colorFrame = this.frameSet.colorFrame;
-    //         //
-    //         if(this.colorFrame){
-    //             return this.colorFrame.data;
-    //         }
-    // }
-    //
-    //
+    getColor(){
+        this.colorFeed = true;
+        this.depthFeed = false;
+        console.log('start color cam');
+    }
 
     stop() {
         console.log('device closed');

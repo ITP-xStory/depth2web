@@ -1,11 +1,11 @@
 const sharp = require('sharp');
 
 module.exports = class Device {
-    constructor(){
+    constructor(id){
+        this.id = id;
         this.init();
-
         this.onImage = () => {};
-       // this.onError = () => {};
+        this.onError = () => {};
     }
 
     init() {
@@ -24,11 +24,7 @@ module.exports = class Device {
         console.log('stopping device');
     }
 
-    // onError(msg){
-    //     this.onError(msg);
-    // }
-
-    onFrame({width, height, data}){
+    onColorFrame({data, width, height}){
         sharp(Buffer.from(data), {raw: {width, height, channels: 3}})
             .resize(640, 480)
             .flop()
@@ -36,11 +32,26 @@ module.exports = class Device {
             .toBuffer()
             .then((img) => {
                 this.onImage(img);
-            });
+            }).catch(function(err){
+            console.log(err);
+        });
     }
-    //
-    // sendFrame() {
-    //     console.log('sending frames');
-    //     this.onFrame([0, 0, 0, 1337, 17, 23]);
-    // }
+
+    onGrayFrame({data, width, height}){
+        // console.log('render');
+        sharp(Buffer.from(data), {raw: {width, height, channels: 2}})
+            .resize(512, 424)
+            .flop()
+            .webp()
+            .toBuffer()
+            .then((img) => {
+                this.onImage(img);
+            }).catch(function(err){
+            console.log(err);
+        });
+    }
+
+    onError(err){
+        return err;
+    }
 };

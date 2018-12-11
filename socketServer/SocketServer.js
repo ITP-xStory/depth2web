@@ -8,7 +8,7 @@
 //
 //     console.log(io);
 //
-//     const device = new (require('./devices/' + type))();
+//     const device = new (require('./Devices/' + type))();
 //
 //     device.start();
 //
@@ -46,56 +46,28 @@
 // };
 
 const http = require('http');
-const socketHTTP = http.Server();
+const socket = http.Server();
 
 class SocketServer {
     constructor(port, onStart = (_) => {}){
 
         this.port = port;
 
-        this.io = require('socket.io')(socketHTTP);
+        this.io = require('socket.io')(socket);
 
         //console.log(this.io.sockets);
 
-        socketHTTP.listen(this.port, () => {
+        socket.listen(this.port, () => {
             onStart(this.port);
         });
-
-        this.devices = [];
-
     }
 
-    startDevice(type){
-
-        this.device = new (require('./devices/' + type))();
-
-        this.device.start();
-
-        this.devices.push(this.device);
-
-        console.log(this.devices.length + " total devices connected");
-
-        //console.log(this.io.sockets);
-
-        this.devices.forEach(d => {
-            d.onImage = img => {
-                //console.log('sending image of length', img.length);
-                this.io.sockets.emit('image', {device: type, img});
-            };
-        });
-    }
-
-
-
-    stopDevice(){
-        this.device.stop();
+    sendImage(data){
+        this.io.sockets.emit('image', data);
     }
 
     stop(){
-        this.devices.forEach(d => {
-            d.stop();
-        });
-        socketHTTP.close();
+        socket.close();
     }
 }
 

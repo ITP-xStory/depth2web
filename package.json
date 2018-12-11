@@ -1,14 +1,14 @@
 {
-  "name": "body2web_build",
+  "name": "Depth2Web",
   "version": "1.0.0",
-  "description": "",
+  "description": "Open source toolkit for depth cameras for web.",
   "main": "/app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Jiwon Shin",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
@@ -16,10 +16,12 @@
     "express": "^4.16.4",
     "http": "0.0.0",
     "node-librealsense": "^0.2130.0",
+    "kinect2": "^0.1.6",
     "sharp": "^0.21.0",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
+    "electron-builder": "^20.38.3",
     "electron-rebuild": "^1.8.2"
   }
 }

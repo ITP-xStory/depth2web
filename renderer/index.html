@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Depth 2 Web</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="style.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="control">
+        <h1>Depth2Web</h1>
         <div id="server">
-            <h2 id="server-msg">Broadcast to:</h2>
-            <form action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="addr">
-                    <label class="mdl-textfield__label" for="addr">Address</label>
-                </div>
-                <button class="mdl-button mdl-js-button mdl-button--raised" id="startServer">
-                    Start
-                </button>
-            </form>
+            <h2 id="server-msg">BROADCAST TO: <span id="broadcast-addr"></span></h2>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="addr">
+                <label class="mdl-textfield__label" for="addr">Enter localhost port number:</label>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised" id="startServer">
+                START
+            </button>
         </div>
         <div id="devices">
-            <h2>Add Devices:</h2>
+            <h2>ADD DEVICES: <span id="devices-info"></span></h2>
             <button class="mdl-button mdl-js-button mdl-button--raised" id="kinect">
-                Kinect
+                KINECT
             </button>
             <button class="mdl-button mdl-js-button mdl-button--raised" id="realSense">
-                realSense
+                REAL SENSE
             </button>
             <button class="mdl-button mdl-js-button mdl-button--raised" id="stopAll">
-                Stop All Devices
+                STOP ALL
             </button>
         </div>
-        <hr>
-
+        <div id="connected"></div>
         <div id="devices-config"></div>
     </div>
     <div id="view">
-        <img id="framePreview">
+        <img id="realSense-view">
+        <img id="kinect-view">
     </div>
 </body>
 </html>

@@ -1,0 +1,54 @@
+html, body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    margin: 0;
+    height: 100%;
+}
+
+h1, h2, h3{
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+h3{
+    font-size: 20px;
+    margin: 0;
+}
+
+#control{
+    width: 35%;
+    height: 100%;
+    background-color: rgba(129, 199, 212, 0.5);
+    float: right;
+    padding: 2.5%;
+}
+
+#view{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#framePreview{
+    width: 100%;
+}
+
+.devicePanel{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 12px;
+    margin-top: 32px;
+    border-radius: 12px;
+}
+
+#broadcast-addr{
+    font-weight: bold;
+}
