@@ -15,6 +15,10 @@ This project is created under mentorship of Lisa Jamhoury and builds upon [Kinec
 
 Depth2Web welcomes contribution to the tool kit in any form, including but not limited to, documentation, use case examples and code. Issues and pull requests are welcome!
 
+## License
+
+Depth2Web is released under MIT License. Please read the [license document](LICENSE.md) for more details.
+
 ## Technical Details
 
 ### Overview
