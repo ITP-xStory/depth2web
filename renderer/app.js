@@ -30,9 +30,9 @@ function startServer(){
 ipcRenderer.on('image', (evt, {device, img}) => {
     //console.log('image received');
 
-    let blob = new Blob([img], {type: 'image/webp'});
+    const blob = new Blob([img], {type: 'image/webp'});
 
-    let url = URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
 
     if(device == 'realSense'){
         document.getElementById('realSense-view').src = url;
@@ -67,36 +67,36 @@ ipcRenderer.on('startedDevice', (evt, type, id) => {
 
 function addRealSensePanel(id){
 
-    let panelDiv = document.createElement('div');
-    panelDiv.id = 'rs-' + id;
+    const panelDiv = document.createElement('div');
+    panelDiv.id = `rs-${id}`;
     panelDiv.setAttribute('class', 'devicePanel')
     document.getElementById('connected').append(panelDiv);
 
-    let deviceTitle = document.createElement('h3');
+    const deviceTitle = document.createElement('h3');
     deviceTitle.id = 'rs-' + id + '-title';
     deviceTitle.innerHTML = "Real Sense " + id;
     panelDiv.append(deviceTitle);
 
-    let depthButton = document.createElement("button");
+    const depthButton = document.createElement("button");
     depthButton.setAttribute("class", "mdl-button mdl-js-button mdl-button--raised");
     depthButton.innerHTML = 'start depth camera';
-    depthButton.id = 'rs-' + id + '-depth';
+    depthButton.id = `rs-${id}-depth`;
     panelDiv.append(depthButton);
 
     depthButton.addEventListener('click', () => ipcRenderer.send('startDepth', 'realSense', id));
 
-    let colorButton = document.createElement("button");
+    const colorButton = document.createElement("button");
     colorButton.setAttribute("class", "mdl-button mdl-js-button mdl-button--raised");
     colorButton.innerHTML = 'start color camera';
-    colorButton.id = 'rs-' + id + '-color';
+    colorButton.id = `rs-${id}-color`;
     panelDiv.append(colorButton);
 
     colorButton.addEventListener('click', () => ipcRenderer.send('startColor', 'realSense', id));
 
-    let closeButton = document.createElement("button");
+    const closeButton = document.createElement("button");
     closeButton.setAttribute("class", "mdl-button mdl-js-button mdl-button--raised");
     closeButton.innerHTML = 'CLOSE DEVICE';
-    closeButton.id = 'rs-' + id + '-close';
+    closeButton.id = `rs-${id}-close`;
     //closeButton.setAttribute('onclick', 'ipcRenderer.send("closeDevice", '+ id +')');
     panelDiv.append(closeButton);
 
@@ -104,7 +104,7 @@ function addRealSensePanel(id){
 }
 
 ipcRenderer.on('startError', (err) => {
-    alert('device start error: ' + err);
+    alert(`device start error: ${err}`);
 });
 
 ipcRenderer.on('closed', () => {
@@ -123,5 +123,5 @@ ipcRenderer.on('closedServer', () => {
 function closeDevice(type, id){
     ipcRenderer.send('closeDevice', id);
 
-    document.getElementById(type + '-' + id).remove();
+    document.getElementById(`${type}-${id}`).remove();
 }

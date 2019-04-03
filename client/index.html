@@ -13,9 +13,9 @@
     let socket = io('http://localhost:8000');
 
     socket.on('image', ({device, img}) => {
-        let blob = new Blob([img], {type: 'image/webp'});
+        const blob = new Blob([img], {type: 'image/webp'});
 
-        let url = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob);
         document.getElementById('framePreview').src = url;
 
     })

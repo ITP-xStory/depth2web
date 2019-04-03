@@ -3,8 +3,8 @@
 const Device = require('../Device');
 let kinect2;
 
-let RAWWIDTH = 512;
-let RAWHEIGHT = 424;
+const RAWWIDTH = 512;
+const RAWHEIGHT = 424;
 
 let busy = false;
 
@@ -35,14 +35,11 @@ class Kinect extends Device{
                     return;
                 }
                 busy = true;
-
-
                 this.depthData = frame.rawDepth.buffer;
 
                 setInterval(() => {
                     this.onGrayFrame({data: this.depthData, width: RAWWIDTH, height: RAWHEIGHT});
                 }, 50);
-
 
             }.bind(this));
             this.kinect.openMultiSourceReader({
