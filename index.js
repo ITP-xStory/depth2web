@@ -54,7 +54,7 @@ function createWindow(){
 
         evt.sender.send('startedDevice', type, id);
 
-        console.log(devices.length + " total Devices connected");
+        console.log(`${devices.length} total Devices connected`);
 
     });
 
@@ -131,31 +131,4 @@ app.on('window-all-closed', function(){
     }
 
     console.log('quit renderer');
-
 });
-//
-// app.on('quit', () => {
-//     console.log('renderer will quit');
-//
-//     if (currentServer) {
-//         currentServer.stop();
-//     }
-// });
-//
-// process.on('exit', () => {
-//     console.log('kill process exit');
-//
-//     console.log('server', !!currentServer);
-//
-//     if (currentServer) {
-//         currentServer.stop();
-//     }
-// });
-//
-// process.on('SIGINT', () => {
-//     console.log('kill process sigint');
-//
-//     if (currentServer) {
-//         currentServer.stop();
-//     }
-// });

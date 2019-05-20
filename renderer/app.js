@@ -30,7 +30,7 @@ function startServer(){
 ipcRenderer.on('image', (evt, {device, id, img, frameType}) => {
     // console.log('image received of type: ' + frameType);
 
-    let blob = new Blob([img], {type: 'image/webp'});
+    const blob = new Blob([img], {type: 'image/webp'});
     let url = URL.createObjectURL(blob);
 
     let depthView = document.getElementById('rs-' + id + '-view-depth');
