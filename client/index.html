@@ -2,23 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>depth2web client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="public/depth2web-client.js"></script>
 </head>
 <body>
-
-<img id="framePreview" src="">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script>
-    let socket = io('http://localhost:8000');
-
-    socket.on('image', ({device, img}) => {
-        let blob = new Blob([img], {type: 'image/webp'});
-
-        let url = URL.createObjectURL(blob);
-        document.getElementById('framePreview').src = url;
-
-    })
-</script>
 </body>
+<script>
+    let d2w = new Depth2Web("http://localhost:8080");
+    d2w.displayDepthImage();
+</script>
 </html>

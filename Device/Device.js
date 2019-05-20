@@ -31,21 +31,21 @@ module.exports = class Device {
             .webp()
             .toBuffer()
             .then((img) => {
-                this.onImage(img);
+                this.onImage(img, "color");
             }).catch(function(err){
             console.log(err);
         });
     }
 
-    onGrayFrame({data, width, height}){
+    onDepthFrame({data, width, height}){
         // console.log('render');
-        sharp(Buffer.from(data), {raw: {width, height, channels: 2}})
-            .resize(512, 424)
+        sharp(Buffer.from(data), {raw: {width, height, channels: 3}})
+            .resize(640, 480)
             .flop()
             .webp()
             .toBuffer()
             .then((img) => {
-                this.onImage(img);
+                this.onImage(img, "depth");
             }).catch(function(err){
             console.log(err);
         });

@@ -1,3 +1,11 @@
+/*
+
+To rebuild: $(npm bin)/electron-rebuild
+https://github.com/electron/electron-rebuild
+To run: npm start
+
+ */
+
 const electron = require('electron');
 const {app, BrowserWindow, ipcMain} = electron;
 
@@ -25,32 +33,28 @@ function createWindow(){
         let newDevice = new (require('./Device/Devices/' + type))(id);
         newDevice.start();
 
-        //let success = true;
         newDevice.onError = err => {
             console.log(err);
             evt.sender.send('startError', err);
-            //success = false;
         };
 
-        //if(success){
-            devices.push(newDevice);
+        devices.push(newDevice);
 
-            devices.forEach(d => {
-                d.onImage = img => {
-                    //console.log('sending image of length', img.length);
-                    evt.sender.send('image', {device: type, img});
+        devices.forEach(d => {
+            d.onImage = (img, frameType) => {
+                //console.log('sending image of length', img.length);
+                evt.sender.send('image', {device: type, id, img, frameType});
 
-                    if(currentServer){
-                        currentServer.sendImage({device: type, img});
-                    }
-                };
+                if(currentServer){
+                    currentServer.sendImage({device: type, id, img, frameType});
+                }
+            };
 
-            });
+        });
 
-            evt.sender.send('startedDevice', type, id);
+        evt.sender.send('startedDevice', type, id);
 
-            console.log(devices.length + " total Devices connected");
-        //}
+        console.log(devices.length + " total Devices connected");
 
     });
 
@@ -82,9 +86,12 @@ function createWindow(){
 
         devices.forEach(d => {
             d.stop();
+
         });
 
         evt.sender.send('closed');
+
+        devices = [];
     });
 
     ipcMain.on('closeServer', (evt) => {
@@ -98,10 +105,10 @@ function createWindow(){
         devices[id].stop();
         console.log('closed device of id ' + id);
         evt.sender.send('closedDevice', id);
-        //devices.splice(id, 1);
+        devices.splice(id, 1);
+
+        console.log(devices.length);
     });
-
-
 
     mainWindow.on('closed', function(){
         mainWindow = null;
@@ -123,40 +130,32 @@ app.on('window-all-closed', function(){
         currentServer = null;
     }
 
-/*
-
-    if(process.platform != 'darwin'){
-        renderer.quit();
-    }
-
-*/
-
     console.log('quit renderer');
 
 });
-
-app.on('quit', () => {
-    console.log('renderer will quit');
-
-    if (currentServer) {
-        currentServer.stop();
-    }
-});
-
-process.on('exit', () => {
-    console.log('kill process exit');
-
-    console.log('server', !!currentServer);
-
-    if (currentServer) {
-        currentServer.stop();
-    }
-});
-
-process.on('SIGINT', () => {
-    console.log('kill process sigint');
-
-    if (currentServer) {
-        currentServer.stop();
-    }
-});
+//
+// app.on('quit', () => {
+//     console.log('renderer will quit');
+//
+//     if (currentServer) {
+//         currentServer.stop();
+//     }
+// });
+//
+// process.on('exit', () => {
+//     console.log('kill process exit');
+//
+//     console.log('server', !!currentServer);
+//
+//     if (currentServer) {
+//         currentServer.stop();
+//     }
+// });
+//
+// process.on('SIGINT', () => {
+//     console.log('kill process sigint');
+//
+//     if (currentServer) {
+//         currentServer.stop();
+//     }
+// });

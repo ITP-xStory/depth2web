@@ -36,8 +36,8 @@ class RealSense extends Device {
         if (resultSet) {
 
            if(this.depthFeed && resultSet.depthFrame){
-                let depthFrame = this.colorizer.colorize(resultSet.depthFrame);
-                this.onColorFrame({data: depthFrame.data, width: depthFrame.width, height: depthFrame.height});
+               let depthFrame = this.colorizer.colorize(resultSet.depthFrame);
+               this.onDepthFrame({data: depthFrame.data, width: depthFrame.width, height: depthFrame.height});
            }
 
            if(this.colorFeed && resultSet.colorFrame){
@@ -48,14 +48,14 @@ class RealSense extends Device {
     }
 
     getDepth(){
-        this.colorFeed = false;
+       // this.colorFeed = false;
         this.depthFeed = true;
         console.log('start depth cam');
     }
 
     getColor(){
         this.colorFeed = true;
-        this.depthFeed = false;
+      //  this.depthFeed = false;
         console.log('start color cam');
     }
 

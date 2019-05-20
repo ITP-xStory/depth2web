@@ -17,8 +17,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "http": "0.0.0",
-    "node-librealsense": "^0.2130.0",
-    "sharp": "^0.21.0",
+    "node-librealsense": "file:node_modules/node-librealsense",
+    "sharp": "^0.21.3",
     "socket.io": "^2.2.0"
   },
   "build": {
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "electron": "^3.0.11",
-    "electron-builder": "^20.38.3",
+    "electron-builder": "^20.41.0",
     "electron-packager": "^13.0.0",
     "electron-rebuild": "^1.8.2"
   }
