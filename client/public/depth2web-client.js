@@ -2,33 +2,27 @@ class Depth2Web{
 
     constructor(addr){
         this.socket = io(addr);
-        this.depthBlob;
-        this.colorBlob;
-        this.depthImg = document.createElement('img');
-        this.depthImg.id = "depthImg";
 
-        this.depthURL;
-        this.colorURL;
-        this.colorImg = document.createElement('img');
-        this.colorImg.id = "colorImg";
+        this.imgWidth = 320;
+        this.imgHeight = 240;
 
+        this.depthBlob = [];
+        this.colorBlob = [];
 
-        this.socket.on('image', ({device, img, frameType}) => {
+        this.depthURL = [];
+        this.colorURL = [];
+
+        this.socket.on('image', ({device, id, img, frameType}) => {
 
             if(frameType == "depth"){
-                this.depthBlob = new Blob([img], {type: 'image/webp'});
-                this.depthURL = URL.createObjectURL(this.depthBlob);
-                if(document.getElementById('depthImg')) {
-                    document.getElementById('depthImg').src = this.depthURL;
-                }
+
+                this.depthBlob[id] = new Blob([img], {type: 'image/webp'});
+                this.depthURL[id] = URL.createObjectURL(this.depthBlob[id]);
             }
 
             if(frameType == "color"){
-                this.colorBlob = new Blob([img], {type: 'image/webp'});
-                this.colorURL = URL.createObjectURL(this.colorBlob);
-                if(document.getElementById('colorImg')) {
-                    document.getElementById('colorImg').src = this.colorURL;
-                }
+                this.colorBlob[id] = new Blob([img], {type: 'image/webp'});
+                this.colorURL[id] = URL.createObjectURL(this.colorBlob[id]);
             }
 
         });
@@ -51,7 +45,7 @@ class Depth2Web{
     }
 
     displayDepthImage(){
-        if(document.getElementById('depthImg') == null && this.depthURL != null){
+        while(document.getElementById('depthImg') == null && this.depthURL != null){
             document.body.append(this.depthImg);
         }
     }

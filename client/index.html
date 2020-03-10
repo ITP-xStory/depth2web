@@ -4,12 +4,54 @@
     <meta charset="UTF-8">
     <title>depth2web client</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
     <script src="public/depth2web-client.js"></script>
 </head>
 <body>
 </body>
 <script>
-    let d2w = new Depth2Web("http://localhost:8080");
-    d2w.displayDepthImage();
+    let d2w;
+
+    function setup(){
+        d2w = new Depth2Web("http://localhost:8080");
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+        rectMode(CENTER);
+    }
+
+    function draw(){
+        background(0, 10);
+
+        for(let i = 0; i < d2w.depthURL.length; i++) {
+            let depth = loadImage(d2w.depthURL[i], img => {
+
+                img.loadPixels();
+
+                console.log(img.pixels);
+
+                for (let y = 0; y < d2w.imgHeight; y += 10) {
+                    for (let x = 0; x < d2w.imgWidth; x += 10) {
+                        let index = (y * d2w.imgWidth + x) * 4;
+
+                        if(img.pixels[index + 2] > img.pixels[index]){
+                            let mappedX = map(x, 0, d2w.imgWidth, 0, width);
+                            let mappedY = map(y, 0, d2w.imgHeight, 0, height);
+
+                            let mappedSize = map(img.pixels[index + 2], 0, 255, 5, 50);
+
+                            fill(img.pixels[index + 2], int(mappedSize / 255) + 50);
+
+                            if(i == 0){
+                                ellipse(mappedX, mappedY, mappedSize, mappedSize);
+                            }else{
+                                rect(mappedX, mappedY, mappedSize, mappedSize);
+                            }
+
+                        }
+                    }
+                }
+            });
+        }
+    }
 </script>
 </html>

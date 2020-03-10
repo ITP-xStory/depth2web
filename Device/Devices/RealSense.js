@@ -24,6 +24,7 @@ class RealSense extends Device {
     }
 
     start() {
+        console.log("start realsense pipeline");
         this.pipeline.start();
 
         this.poller = setInterval(() => {

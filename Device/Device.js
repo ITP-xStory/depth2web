@@ -26,7 +26,8 @@ module.exports = class Device {
 
     onColorFrame({data, width, height}){
         sharp(Buffer.from(data), {raw: {width, height, channels: 3}})
-            .resize(640, 480)
+            .resize(320, 240)
+            //.resize(640, 480)
             .flop()
             .webp()
             .toBuffer()
@@ -40,7 +41,8 @@ module.exports = class Device {
     onDepthFrame({data, width, height}){
         // console.log('render');
         sharp(Buffer.from(data), {raw: {width, height, channels: 3}})
-            .resize(640, 480)
+            .resize(320, 240)
+            //.resize(640, 480)
             .flop()
             .webp()
             .toBuffer()

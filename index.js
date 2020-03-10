@@ -42,6 +42,7 @@ function createWindow(){
 
         devices.forEach(d => {
             d.onImage = (img, frameType) => {
+                let id = d.id;
                 //console.log('sending image of length', img.length);
                 evt.sender.send('image', {device: type, id, img, frameType});
 
