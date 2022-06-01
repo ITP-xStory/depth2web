@@ -18,7 +18,7 @@
     "express": "^4.16.4",
     "http": "0.0.0",
     "node-librealsense": "file:node_modules/node-librealsense",
-    "sharp": "^0.21.3",
+    "sharp": "^0.30.5",
     "socket.io": "^2.2.0"
   },
   "build": {
