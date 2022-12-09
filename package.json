@@ -15,7 +15,7 @@
     "asar": "^0.14.6",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "http": "0.0.0",
     "node-librealsense": "file:node_modules/node-librealsense",
     "sharp": "^0.21.3",
